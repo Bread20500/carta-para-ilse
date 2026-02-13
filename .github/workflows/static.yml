@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilse Sofia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Special+Elite&display=swap');
+
+        body {
+            background-color: #d7ccc8; /* Fondo general más cálido */
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Special Elite', cursive;
+        }
+
+        .paper-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            cursor: pointer;
+            perspective: 1000px;
+            transition: transform 0.5s ease;
+        }
+
+        .layer {
+            position: absolute;
+            inset: 0;
+            /* Color marrón claro tipo papel café/pergamino */
+            background: #e0c9a6; 
+            background-image: radial-gradient(circle at 50% 50%, #e8d5b7 0%, #d4b483 100%);
+            border: 2px solid #4e342e;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            backface-visibility: hidden;
+            transform-origin: center;
+        }
+
+        /* Efecto de bordes quemados o desgastados */
+        .layer::before {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            border: 1px double #8d6e63;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Manchas de café simuladas */
+        .layer::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .sketch-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            fill: none;
+            stroke: #2d1b15; /* Tinta marrón oscuro/sepia */
+            stroke-width: 1.5;
+        }
+
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: #2d1b15;
+        }
+
+        .instruction {
+            position: fixed;
+            bottom: 40px;
+            color: #5d4037;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Estados de las capas */
+        .layer.hidden {
+            transform: scale(0.1) rotate(45deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .layer.expanded {
+            transform: scale(4) rotate(-20deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .layer.active {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* Estilo vintage de papel con más textura */
+        .vintage-grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.4;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vintage-grain"></div>
+
+    <div class="paper-container" id="origami">
+        <!-- Capa 1: El Ramo (Portada) -->
+        <div class="layer active" id="layer-0">
+            <svg class="sketch-icon" viewBox="0 0 100 100">
+                <path d="M50 80 C 40 60, 20 50, 20 30 A 15 15 0 0 1 50 30 A 15 15 0 0 1 80 30 C 80 50, 60 60, 50 80" />
+                <path d="M50 80 L 40 95 M 50 80 L 60 95 M 50 80 L 50 98" />
+                <circle cx="35" cy="25" r="3" fill="#2d1b15" />
+                <circle cx="65" cy="25" r="3" fill="#2d1b15" />
+                <path d="M30 40 Q 50 50 70 40" />
+            </svg>
+            <h2 class="font-bold text-xl uppercase tracking-widest text-[#2d1b15]">Un pequeño detalle</h2>
+            <p class="message mt-2">Te quiero Ilse</p>
+            <div class="mt-4 border-t border-[#2d1b15] w-16 mx-auto opacity-30"></div>
+            <p class="text-[10px] mt-2 italic text-[#5d4037]">Feliz 14 de febrero</p>
+        </div>
+
+        <!-- Capa 2: La Brújula -->
+        <div class="layer hidden" id="layer-1">
+            <svg class="sketch-icon" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" />
+                <circle cx="50" cy="50" r="2" fill="#2d1b15" />
+                <path d="M50 5 L 55 45 L 50 50 L 45 45 Z" fill="#2d1b15" />
+                <path d="M50 95 L 55 55 L 50 50 L 45 55 Z" />
+                <path d="M95 50 L 55 55 L 50 50 L 55 45 Z" />
+                <path d="M5 50 L 45 55 L 50 50 L 45 45 Z" />
+                <text x="47" y="15" font-size="8" fill="#2d1b15">N</text>
+            </svg>
+            <p class="message">Me enseñaste a donde ir<br>en el momento donde estuve más perdido</p>
+        </div>
+
+        <!-- Capa 3: El Barco y la Eternidad -->
+        <div class="layer hidden" id="layer-2">
+            <svg class="sketch-icon" viewBox="0 0 100 100">
+                <path d="M20 70 L 80 70 L 70 85 L 30 85 Z" fill="#2d1b15" />
+                <path d="M50 70 L 50 20 L 80 60 Z" />
+                <path d="M10 75 Q 30 65 50 75 T 90 75" stroke-dasharray="2,2" />
+            </svg>
+            <p class="message">Gracias por navegar junto a mi<br>y por los panes que me regalaste en el viaje</p>
+        </div>
+
+        <!-- Capa 4: El Corazón Real -->
+        <div class="layer hidden" id="layer-3">
+            <svg class="sketch-icon" viewBox="0 0 100 100">
+                <path d="M50 30 C 50 30 40 20 30 30 C 20 40 50 70 50 70 C 50 70 80 40 70 30 C 60 20 50 30 50 30" />
+                <path d="M45 40 L 40 35 M 55 40 L 60 35 M 50 45 L 50 60" />
+                <path d="M35 50 Q 50 55 65 50" />
+            </svg>
+            <p class="message">Tienes un lugar<br>muy especial en mi corazón y perdon por no demostrarlo</p>
+        </div>
+
+        <!-- Capa Final: Declaración -->
+        <div class="layer hidden" id="layer-4">
+            <h1 class="text-3xl mb-4 text-[#2d1b15]">∞</h1>
+            <p class="message">Siempre seras mi amiga y siempre vas a ser alguien especial para mi</p>
+
+            <p class="mt-4 text-xs italic uppercase text-[#5d4037]">PD: Enviale saludos a mi abuela y dile que le voy a dar un pastel de chocolate o de fresa</p>
+            <button onclick="reset(event)" class="mt-6 text-[10px] underline tracking-widest uppercase text-[#5d4037] opacity-60 hover:opacity-100 transition-opacity">Volver al inicio</button>
+        </div>
+    </div>
+
+    <p class="instruction" id="hint">Haz clic para abrir</p>
+
+    <script>
+        let currentLayer = 0;
+        const totalLayers = 5;
+        const origami = document.getElementById('origami');
+        const hint = document.getElementById('hint');
+
+        origami.addEventListener('click', () => {
+            if (currentLayer < totalLayers - 1) {
+                // Expandir capa actual
+                const prev = document.getElementById(`layer-${currentLayer}`);
+                prev.classList.remove('active');
+                prev.classList.add('expanded');
+
+                // Mostrar siguiente capa
+                currentLayer++;
+                const next = document.getElementById(`layer-${currentLayer}`);
+                next.classList.remove('hidden');
+                next.classList.add('active');
+
+                // Feedback visual de clic
+                origami.style.transform = `scale(0.95)`;
+                setTimeout(() => { origami.style.transform = `scale(1)`; }, 100);
+
+                if (currentLayer === totalLayers - 1) {
+                    hint.style.display = 'none';
+                }
+            }
+        });
+
+        function reset(event) {
+            // Evitar que el clic del botón dispare el evento del contenedor
+            event.stopPropagation();
+            
+            // Reiniciar todas las capas
+            for (let i = 0; i < totalLayers; i++) {
+                const layer = document.getElementById(`layer-${i}`);
+                layer.classList.add('hidden');
+                layer.classList.remove('active', 'expanded');
+            }
+            currentLayer = 0;
+            const first = document.getElementById('layer-0');
+            first.classList.remove('hidden');
+            first.classList.add('active');
+            hint.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
